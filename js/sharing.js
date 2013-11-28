@@ -53,7 +53,6 @@
         url: pinterestUrl,
         dataType: "jsonp",
         success: function(data){
-            console.log(data);
             var pins = data.count;
             $(".pinterest .numbers").html(pins);
         }
