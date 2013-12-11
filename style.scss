@@ -1,0 +1,97 @@
+@mixin hide-text() {
+ 	position:relative;
+    text-indent:-99999px;
+    display: inline-block;
+ }
+
+ @mixin rem($property, $values...) {
+	$n: length($values);
+  	$i: 1;
+
+  	$pxlist: ();
+  	$remlist: ();
+
+  	@while $i <= $n {
+		$itemVal: (nth($values, $i));
+		@if $itemVal != "auto"{
+			$pxlist: append($pxlist, $itemVal + px);
+	    	$remlist: append($remlist, ($itemVal / 16) + rem);
+		}@else{
+			$pxlist: append($pxlist, auto);
+			$remlist: append($remlist, auto);
+		}
+ 		
+	
+    	$i: $i + 1;
+  	}
+
+  	#{$property}: $pxlist;
+  	#{$property}: $remlist;
+}
+body{
+	font-family:Helvetica, Arial, sans-serif;
+	@include rem("font-size", 12);
+}
+ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+
+	li{
+		@include rem("margin-left", 10);
+		display:inline-block;
+
+		a{	
+			display:block;
+			position:relative;
+			text-decoration:none;
+			font-weight:bold;
+			@include rem("min-width", 70);
+			color:black;
+		}
+
+		span.numbers{
+			position:absolute;
+			@include rem("top", 5);
+			@include rem("margin-left", 5);
+			@include rem("font-size", 16);
+		}
+		
+		span.icon{
+			position:relative;
+		    text-indent:-99999px;
+		    display: inline-block;
+			background:url(../img/social-icons.jpg) no-repeat;
+			@include rem("width", 26);
+			@include rem("height", 25);
+		}
+		a.facebook{
+			span.icon{
+				background-position:0 0;
+			}
+		}
+		a.twitter{
+			span.icon{
+				@include rem("background-position", -33, 0);
+			}
+		}
+		a.google-plus{
+			span.icon{
+				@include rem("background-position", -66, 0);
+			}
+		}
+		a.linked-in{
+			span.icon{
+				@include rem("background-position", -130, 0);
+			}
+		}
+		a.pinterest{
+			span.icon{
+				@include rem("background-position", -100, 0);
+			}
+		}
+	}
+	li:first-child{
+		margin-left:0;
+	}
+}

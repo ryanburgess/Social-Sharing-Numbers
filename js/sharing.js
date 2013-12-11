@@ -1,7 +1,9 @@
 (function($) {
- 
-    //var getUrl = window.location.href; // use this to get the numbers for page url
-    var getUrl = "http://blog.evernote.com/blog/2013/11/26/how-to-capture-your-social-media-memories-with-evernote/"; // Test url
+    "use strict";
+
+    //var getUrl = window.location.href;
+    var getUrl = "http://blog.evernote.com/blog/2013/11/26/how-to-capture-your-social-media-memories-with-evernote/";
+    var pageTitle = "Test";
     var facebookUrl = "http://graph.facebook.com/?ids="+getUrl;
     var twitterUrl = "http://urls.api.twitter.com/1/urls/count.json?url="+getUrl;
     var linkedInUrl = "http://www.linkedin.com/countserv/count/share?url="+ getUrl;
@@ -30,10 +32,10 @@
 	//Google Plus share
 	$.ajax({
         type: "POST",
-        url: "/inc/googleplus.php",
+        url: "/social-sharing/inc/googleplus.php",
         data: {"url": getUrl},
         cache: false,
-        success: function(result){	
+        success: function(result){
             $(".google-plus .numbers").html(result);
         }
     });
@@ -56,6 +58,26 @@
             var pins = data.count;
             $(".pinterest .numbers").html(pins);
         }
+    });
+
+    $(".facebook").on("click", function (){
+        window.open("http://www.facebook.com/sharer.php?u="+encodeURIComponent(getUrl)+"&t="+encodeURIComponent(pageTitle),"sharer","toolbar=0,status=0,width=626,height=436");
+        return false;
+    });
+
+    $(".twitter").on("click", function (){
+        window.open("https://twitter.com/share?url="+ getUrl,"sharer","toolbar=0,status=0,width=626,height=436");
+        return false;
+    });
+
+    $(".google-plus").on("click", function (){
+        window.open("https://plus.google.com/share?url="+getUrl,"sharer","toolbar=0,status=0,width=626,height=436");
+        return false;
+    });
+
+    $(".linked-in").on("click", function (){
+        window.open("http://www.linkedin.com/shareArticle?mini=true&url="+ getUrl +"&title="+pageTitle,"sharer","toolbar=0,status=0,width=626,height=436");
+        return false;
     });
 	
 }(jQuery));
