@@ -79,6 +79,11 @@
         window.open("http://www.linkedin.com/shareArticle?mini=true&url="+ getUrl +"&title="+pageTitle,"sharer","toolbar=0,status=0,width=626,height=436");
         return false;
     });
+
+    $(".pinterest").on("click", function (){
+        window.open("http://pinterest.com/pin/create/button/?url="+ pageUrl,"sharer","toolbar=0,status=0,width=626,height=436");
+        return false;
+    });
 	
 }(jQuery));
 
